@@ -177,7 +177,7 @@ nav .vans-link {
 /* HOME PAGE */
 /*Adding a beckground image to the home page */
 .home-page {
-  background-image: url(./images/home-hero.png);
+  background-image: url(/images/home-hero.png);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
