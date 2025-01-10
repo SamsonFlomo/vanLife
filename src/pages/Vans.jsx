@@ -2,7 +2,6 @@ import { Link } from "react-router-dom"
 
 
 function Vans({ vans }) {
-  console.log("Vans-in-Vans", vans)
   const types = [
     "simple",
     "luxury",

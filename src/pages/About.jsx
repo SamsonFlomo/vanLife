@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import heroImg from "/images/about-hero.png";
 
 
 function About() {
@@ -6,7 +7,7 @@ function About() {
     <main className="main about-page">
       <section className="content-wrapper">
         <img
-          src="./images/about-hero.png"
+          src={heroImg}
           alt="A man sitting on top of a van"
           className="about-img"
         />

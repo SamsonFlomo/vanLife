@@ -53,7 +53,7 @@ function App() {
     {
       name: "About",
       id: "about-link",
-      url: "/vanLife/about",
+      url: "/vanLife/about/",
       component: (<About />),
       class: "about-link",
       active: false,
@@ -61,14 +61,14 @@ function App() {
     {
       name: "Vans",
       id: "vans-link",
-      url: "/vanLife/vans",
+      url: "/vanLife/vans/",
       class: "vans-link",
       active: false,
     },
     {
       name: "Van",
       id: "van-link",
-      url: "/vanLife/van",
+      url: "/vanLife/van/",
       component: (<Van />),
       class: "van-link",
       active: false,
@@ -101,7 +101,7 @@ function App() {
   })
 
   const routCollections = navElements.map((tag, key) => {
-    if(tag.componnt) return;
+    if(!tag.component) return;
     return (
       <Route
         path={tag.url}
