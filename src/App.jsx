@@ -82,7 +82,7 @@ function App() {
   // FUNCTIONS
   const handleNavLinkClick = (e) => {
     const id = e.target.id ? e.target.id : "No Id";
-    toggleStateProperty(navElements, setnavElements, "active", id);
+    toggleStateProperty(navElements, setNavElements, "active", id);
   }
 
 
