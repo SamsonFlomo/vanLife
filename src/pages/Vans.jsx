@@ -11,8 +11,9 @@ function Vans({ vans }) {
   const vansElements = vans.map((van) => {
     return (
       <Link
-        to={`/vanLife/vans/${van.id}`}
+        to={`/vans/${van.id}`}
         className="van-card"
+        aria-label={`View details for ${van.name} at price ${van.price} per day.`}
         key={van.id}
       >
         <img src={van.imageUrl} alt={`Photo of ${van.name}`} />
