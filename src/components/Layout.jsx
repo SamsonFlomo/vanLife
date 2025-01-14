@@ -4,10 +4,10 @@ import Footer from "./Footer";
 
 
 
-function Layout ({navLinks}) {
+function Layout ({pages}) {
   return (
     <>
-      <Header navLinks={navLinks} />
+      <Header pages={pages} />
       <Outlet />
       <Footer />
     </>

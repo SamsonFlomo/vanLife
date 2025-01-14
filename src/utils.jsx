@@ -1,4 +1,4 @@
-
+import { Route, Link } from "react-router-dom";
 
 
 const toggleStateProperty = (state, setState, propertyStr, objectItemId) => {
@@ -30,4 +30,32 @@ const toggleStateProperty = (state, setState, propertyStr, objectItemId) => {
   }
 };
 
-export { toggleStateProperty };
+
+  function renderRoutes(routeArray) {
+    return routeArray.map(({ url, component }) => (
+      <Route key={url} path={url} element={component} />
+    ));
+  };
+  
+  function renderLinks(linkArray) {
+    return linkArray.map(({ name, url, className }) => (
+    <li key={url}>
+      <Link to={url} className={`nav-links ${className}`}>
+        {name}
+      </Link>
+    </li>
+  ));
+  }
+  
+  
+
+export { 
+  toggleStateProperty,
+  renderRoutes,
+  renderLinks,
+};
+
+
+
+
+

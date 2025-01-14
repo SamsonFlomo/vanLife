@@ -9,19 +9,23 @@ function Van({ vans }) {
   useEffect(() => {
     const fetchVanDetails = async () => {
       try {
-        const van = vans.find(van => String(van.id) === params.id);
-        if (van) {
-          setVanDetails(van);
+        if (Array.isArray(vans)) {
+          const van = vans.find(van => String(van.id) === params.id);
+          if (van) {
+            setVanDetails(van);
+          } else {
+            console.error("Van not found.");
+          }
         } else {
-          console.error("Van not found.");
+          console.error("Vans is not an array:", vans);
         }
       } catch (e) {
         console.error("Error finding van:", e);
       }
     };
 
-    fetchVanDetails(); // Execute the function here
-  }, [params.id, vans]); // Add vans as a dependency
+    fetchVanDetails();
+  }, [params.id, vans]);
 
   return (
     <main className="main van-page">
@@ -56,4 +60,3 @@ function Van({ vans }) {
 }
 
 export default Van;
-

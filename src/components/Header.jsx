@@ -2,22 +2,27 @@ import { useCallback } from "react";
 import { Link } from "react-router-dom";
 
 
-function Header ({navLinks}) {
+function Header({ pages }) {
+  
+  
   const renderNavLinks = useCallback(
-    () =>
-      navLinks.map(({ name, url, className }) => (
+    () => {
+      const allNavLinks = pages.filter(({ isNav }) => isNav);
+      
+      return allNavLinks.map(({ name, url, className }) => (
         <Link key={url} to={url} className={`nav-link ${className}`}>
           <h2>{name}</h2>
         </Link>
-      )),
-    [navLinks]
+      ))
+      },
+    [pages]
   );
 
 
   return (
-   <header className="header">
-     <nav className="nav">{renderNavLinks()}</nav>
-   </header>
+    <header className="header">
+      <nav className="nav">{renderNavLinks()}</nav>
+    </header>
   );
 }
 
