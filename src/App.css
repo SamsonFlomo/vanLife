@@ -130,15 +130,34 @@ nav .vans-link {
   color: var(--primary-black-txt);
 }
 
+.nav-link:hover h2 {
+  text-decoration: underline;
+  color: var(--primary-black-txt);
+  font-weight: bold;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+  color: var(--primary-black-txt);
+  font-weight: bold;
+}
 
 .active h2 {
   text-decoration: underline;
   color: var(--primary-black-txt);
+  font-weight: bold;
 }
 
+
+.active {
+  text-decoration: underline;
+  color: var(--primary-black-txt);
+  font-weight: bold;
+}
 .home-link.active h2 {
   text-decoration: none;
 }
+
 
 .main {
   background-color: blue;

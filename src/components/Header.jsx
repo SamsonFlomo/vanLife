@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 function Header({ pages }) {
@@ -9,10 +9,15 @@ function Header({ pages }) {
     () => {
       const allNavLinks = pages.filter(({ isNav }) => isNav);
       
-      return allNavLinks.map(({ name, url, className }) => (
-        <Link key={url} to={url} className={`nav-link ${className}`}>
+      return allNavLinks.map(({ name, url, forClass, end }) => (
+        <NavLink 
+          key={url} 
+          to={url} 
+          className={`nav-link ${forClass}`}
+          {...(end && {end: end})}
+        >
           <h2>{name}</h2>
-        </Link>
+        </NavLink>
       ))
       },
     [pages]

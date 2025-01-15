@@ -8,10 +8,13 @@ import Van from "./pages/van/Van";
 import HostLayout from "./pages/host/HostLayout";
 import Income from "./pages/host/income";
 import Reviews from "./pages/host/reviews";
+import UserVans from "./pages/host/UserVans";
 import Dashboard from "./pages/host/Dashboard";
 import Layout from "./components/Layout.jsx";
 import { renderRoutes } from "./utils";
 import "./server";
+
+
 
 function App() {
   const [vans, setVans] = useState([]);
@@ -36,32 +39,37 @@ function App() {
     return [
       {
         name: "#VanLife",
-        url: "/",
+        url: "",
         component: <Home />,
+        forClass: "home-link",
         isNav: true,
+        end: true,
       },
       {
         name: "Host",
-        url: "/host",
-        component: <HostLayout />,
+        url: "host",
+        forClass: "host-link",
         isNav: true,
       },
       {
         name: "About",
-        url: "/about",
+        url: "about",
         component: <About />,
+        forClass: "about-link",
         isNav: true,
       },
       {
         name: "Vans",
-        url: "/vans",
+        url: "vans",
         component: <Vans vans={vans} />,
+        forClass: "vans-link",
         isNav: true,
       },
       {
         name: "Van",
-        url: "/vans/:id",
+        url: "vans/:id",
         component: <Van vans={vans} />,
+        forClass: "van-link",
         isNav: false,
       },
     ];
@@ -72,24 +80,34 @@ function App() {
     return [
       {
         name: "Dashboard",
-        url: "/host",
+        url: "",
         component: <Dashboard />,
+        forClass: "dashboard-link",
+        end: true,
       },
       {
         name: "Income",
-        url: "/host/income",
+        url: "income",
         component: <Income />,
+        forClass: "income-link",
+      },
+      {
+        name: "Vans",
+        url: "vans",
+        component: <UserVans />,
+        forClass: "userVans-link"
       },
       {
         name: "Reviews",
-        url: "/host/reviews",
+        url: "reviews",
         component: <Reviews />,
+        forClass: "reviews-link"
       },
     ];
   }, []);
 
   return (
-    <BrowserRouter basename="/vanLife">
+    <BrowserRouter basename="/vanLife/">
       <Routes>
         {/* Main Layout */}
         <Route element={<Layout pages={routes()} />}>
@@ -98,7 +116,7 @@ function App() {
 
           {/* Host Routes */}
           <Route
-            path="/host"
+            path="host"
             element={<HostLayout hostViews={hostViews()} />}
           >
             {renderRoutes(hostViews())}

@@ -1,4 +1,4 @@
-import { Route, Link } from "react-router-dom";
+import { Route, NavLink } from "react-router-dom";
 
 
 const toggleStateProperty = (state, setState, propertyStr, objectItemId) => {
@@ -32,17 +32,26 @@ const toggleStateProperty = (state, setState, propertyStr, objectItemId) => {
 
 
   function renderRoutes(routeArray) {
-    return routeArray.map(({ url, component }) => (
-      <Route key={url} path={url} element={component} />
-    ));
+    return routeArray.map(({ url, component }, key) => {
+      if(!component) return;
+      return <Route 
+        key={url || key} 
+        {...(url === "" ? { index: true } : { path: url })}
+        element={component} 
+      />
+    });
   };
   
-  function renderLinks(linkArray) {
-    return linkArray.map(({ name, url, className }) => (
-    <li key={url}>
-      <Link to={url} className={`nav-links ${className}`}>
+  function renderListLinks(linkArray) {
+    return linkArray.map(({ name, url, forClass, end }, key) => (
+    <li key={url || key}>
+      <NavLink 
+        to={url} 
+        {...(end && {end: end})}
+        className={`nav-link ${forClass ? forClass : ""}`}
+      >
         {name}
-      </Link>
+      </NavLink>
     </li>
   ));
   }
@@ -52,7 +61,7 @@ const toggleStateProperty = (state, setState, propertyStr, objectItemId) => {
 export { 
   toggleStateProperty,
   renderRoutes,
-  renderLinks,
+  renderListLinks,
 };
 
 

@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { renderLinks } from "../../utils";
+import { renderListLinks } from "../../utils";
 
 function HostLayout({ hostViews = [] }) {
 
@@ -8,7 +8,7 @@ function HostLayout({ hostViews = [] }) {
       <section className="content-wrapper">
         <nav className="nav">
           <ul className="nav-list">
-            {renderLinks(hostViews)}
+            {renderListLinks(hostViews)}
           </ul>
         </nav>
         <Outlet />
