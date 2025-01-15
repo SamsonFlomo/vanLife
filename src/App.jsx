@@ -110,7 +110,7 @@ function App() {
     <BrowserRouter basename="/vanLife/">
       <Routes>
         {/* Main Layout */}
-        <Route element={<Layout pages={routes()} />}>
+        <Route path="/" element={<Layout pages={routes()} />}>
           {/* Main Routes */}
           {renderRoutes(routes())}
 
