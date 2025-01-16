@@ -79,6 +79,7 @@ function App() {
         component: <Dashboard />,
         forClass: "dashboard-link",
         end: true,
+        isNav: true,
       },
       {
         name: "Income",

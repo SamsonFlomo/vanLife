@@ -3,8 +3,8 @@
 
 function Dashboard() {
   return (
-    <secton>
-      <div className="welcome-card">
+    <section>
+      <div className="welcome-bar">
         <h2>Welcome</h2>
         <p>Income last <span className="bold">30 days</span></p>
         <p className="bold">$2,260</p>
@@ -13,7 +13,7 @@ function Dashboard() {
         <h3>Review Score</h3>
         <p className="bold">4.9</p>
       </div>
-    </secton>
+    </section>
   )
 }
 
