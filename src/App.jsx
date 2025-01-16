@@ -8,10 +8,11 @@ import Van from "./pages/van/Van";
 import HostLayout from "./pages/host/HostLayout";
 import Income from "./pages/host/income";
 import Reviews from "./pages/host/reviews";
-import UserVans from "./pages/host/UserVans";
+import HostVans from "./pages/host/HostVans";
+import HostVanDetail from "./pages/host/HostVanDetail";
 import Dashboard from "./pages/host/Dashboard";
 import Layout from "./components/Layout.jsx";
-import { renderRoutes } from "./utils";
+import { renderRoutes, getVans } from "./utils";
 import "./server";
 
 
@@ -22,13 +23,7 @@ function App() {
   // Fetch vans data once on load
   useEffect(() => {
     const fetchVans = async () => {
-      try {
-        const res = await fetch("/api/vans");
-        const data = await res.json();
-        setVans(data.vans || []);
-      } catch (error) {
-        console.error("Error fetching vans:", error);
-      }
+      getVans(setVans, "/api/vans");
     };
 
     fetchVans();
@@ -90,27 +85,37 @@ function App() {
         url: "income",
         component: <Income />,
         forClass: "income-link",
+        isNav: true,
       },
       {
         name: "Vans",
         url: "vans",
-        component: <UserVans />,
-        forClass: "userVans-link"
+        component: <HostVans />,
+        forClass: "userVans-link",
+        isNav: true,
+      },
+      {
+        name: "VanDetail",
+        url: "vans/:id",
+        component: <HostVanDetail vans={vans} />,
+        forClass: "van-detail-link",
+        isNav: false,
       },
       {
         name: "Reviews",
         url: "reviews",
         component: <Reviews />,
-        forClass: "reviews-link"
+        forClass: "reviews-link",
+        isNav: true,
       },
     ];
-  }, []);
+  }, [vans]);
 
   return (
     <BrowserRouter basename="/vanLife/">
       <Routes>
         {/* Main Layout */}
-        <Route path="/" element={<Layout pages={routes()} />}>
+        <Route element={<Layout pages={routes()} />}>
           {/* Main Routes */}
           {renderRoutes(routes())}
 

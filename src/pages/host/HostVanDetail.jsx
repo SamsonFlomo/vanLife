@@ -8,19 +8,18 @@ function Van({ vans }) {
   const { id, name, price, description, imageUrl, type } = vanDetails || {};
   const params = useParams();
 
-   useEffect(() => {
+  useEffect(() => {
     const fetchVans = () => {
       getVans(setVanDetails, `/api/vans/${params.id}`);
     };
 
     fetchVans();
   }, []);
-  
-  
+
   return (
     <main className="main van-page">
       <section className="content-wrapper">
-        <Link to="/vans" className="back-link">
+        <Link to="/host/vans/" className="back-link">
           ← Back to all Vans
         </Link>
 

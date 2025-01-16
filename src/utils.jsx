@@ -43,8 +43,9 @@ const toggleStateProperty = (state, setState, propertyStr, objectItemId) => {
   };
   
   function renderListLinks(linkArray) {
-    return linkArray.map(({ name, url, forClass, end }, key) => (
-    <li key={url || key}>
+    return linkArray.map(({ name, url, forClass, end, isNav }, key) => {
+    if(!isNav) return;
+    return <li key={url || key}>
       <NavLink 
         to={url} 
         {...(end && {end: end})}
@@ -53,8 +54,32 @@ const toggleStateProperty = (state, setState, propertyStr, objectItemId) => {
         {name}
       </NavLink>
     </li>
-  ));
+  });
   }
+  
+  async function getVans(setState, url) {
+  if (typeof setState !== "function" || typeof url !== "string") {
+    console.error("Invalid arguments passed to getVans");
+    return;
+  }
+
+  try {
+    const res = await fetch(url);
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
+
+    const data = await res.json();
+
+    setState(data.vans || []);
+    
+  } catch (error) {
+    console.error("Error fetching vans:", error.message || error);
+  }
+}
+
+
   
   
 
@@ -62,6 +87,7 @@ export {
   toggleStateProperty,
   renderRoutes,
   renderListLinks,
+  getVans,
 };
 
 

@@ -4,9 +4,9 @@ import { renderListLinks } from "../../utils";
 function HostLayout({ hostViews = [] }) {
 
   return (
-    <main className="main host-layout-page">
+    <main className="main host-page">
       <section className="content-wrapper">
-        <nav className="nav">
+        <nav className="host-nav nav">
           <ul className="nav-list">
             {renderListLinks(hostViews)}
           </ul>
