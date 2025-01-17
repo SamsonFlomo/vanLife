@@ -6,8 +6,8 @@ function HostLayout({ hostViews = [] }) {
   return (
     <main className="main host-page">
       <section className="content-wrapper">
-        <nav className="host-nav nav">
-          <ul className="nav-list">
+        <nav className="host-nav">
+          <ul className="nav-list flex-row">
             {renderListLinks(hostViews)}
           </ul>
         </nav>

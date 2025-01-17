@@ -17,9 +17,8 @@ function Van({ vans }) {
   }, []);
 
   return (
-    <main className="main van-page">
-      <section className="content-wrapper">
-        <Link to="/host/vans/" className="back-link">
+    <section className="host-van-detail first-level-nest flex-column">
+        <Link to="/host/vans/" className="back-link underline">
           ← Back to all Vans
         </Link>
 
@@ -27,7 +26,7 @@ function Van({ vans }) {
           <>
             <img src={imageUrl} alt={`Photo of ${name}`} />
 
-            <div className="van-info">
+            <div className="van-info flex-column">
               <div className={`van-type ${type}`}>
                 <span>{type}</span>
               </div>
@@ -44,7 +43,6 @@ function Van({ vans }) {
           <h1>Vans loading...</h1>
         )}
       </section>
-    </main>
   );
 }
 
