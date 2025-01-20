@@ -22,42 +22,67 @@ const toggleStateProperty = (state, setState, propertyStr, objectItemId) => {
           };
         }
         return {
-            ...item,
-            [propertyStr]: false,
-          };;
+          ...item,
+          [propertyStr]: false,
+        };;
+      })
+    );
+  }
+};
+
+function resetStateProperty(state, setState, propertyStr) {
+  if (!state || (typeof state !== "object" && !Array.isArray(state))) {
+    console.error("Invalid state: statresetStatePropertye should be an object or array");
+    return;
+  }
+
+  if (!Array.isArray(state)) {
+    setState((prevState) => ({
+      ...prevState,
+      [propertyStr]: false,
+    }));
+  } else {
+    setState((prevState) =>
+      prevState.map((item) => {
+        return {
+          ...item,
+          [propertyStr]: false,
+        };;
       })
     );
   }
 };
 
 
-  function renderRoutes(routeArray) {
-    return routeArray.map(({ url, component }, key) => {
-      if(!component) return;
-      return <Route 
-        key={url || key} 
-        {...(url === "" ? { index: true } : { path: url })}
-        element={component} 
-      />
-    });
-  };
-  
-  function renderListLinks(linkArray) {
-    return linkArray.map(({ name, url, forClass, end, isNav }, key) => {
-    if(!isNav) return;
+
+
+function renderRoutes(routeArray) {
+  return routeArray.map(({ url, component }, key) => {
+    if (!component) return;
+    return <Route
+      key={url || key}
+      {...(url === "" ? { index: true } : { path: url })}
+      element={component}
+    />
+  });
+};
+
+function renderListLinks(linkArray) {
+  return linkArray.map(({ name, url, forClass, end, isNav }, key) => {
+    if (!isNav) return;
     return <li key={url || key}>
-      <NavLink 
-        to={url} 
-        {...(end && {end: end})}
+      <NavLink
+        to={url}
+        {...(end && { end: end })}
         className={`nav-link ${forClass ? forClass : ""}`}
       >
         {name}
       </NavLink>
     </li>
   });
-  }
-  
-  async function getVans(setState, url) {
+}
+
+async function getVans(setState, url) {
   if (typeof setState !== "function" || typeof url !== "string") {
     console.error("Invalid arguments passed to getVans");
     return;
@@ -73,21 +98,33 @@ const toggleStateProperty = (state, setState, propertyStr, objectItemId) => {
     const data = await res.json();
 
     setState(data.vans || []);
-    
+
   } catch (error) {
     console.error("Error fetching vans:", error.message || error);
   }
 }
 
 
-  
-  
+function handleChange(e, setState) {
+  const { name, value } = e.target;
+  setState((prevState) => ({
+    ...prevState,
+    [name]: value,
+  }));
 
-export { 
+}
+
+
+
+
+
+export {
   toggleStateProperty,
+  resetStateProperty,
   renderRoutes,
   renderListLinks,
   getVans,
+  handleChange,
 };
 
 

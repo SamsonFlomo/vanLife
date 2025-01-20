@@ -1,11 +1,19 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getVans } from "../../utils";
+import { getVans, renderListLinks } from "../../utils";
 
 
-function Van({ vans }) {
+function HostVanDetail({ hostVansDetailViews }) {
   const [vanDetails, setVanDetails] = useState({});
-  const { id, name, price, description, imageUrl, type } = vanDetails || {};
+  const {
+    id,
+    name,
+    price,
+    description,
+    imageUrl,
+    type,
+    visibility
+  } = vanDetails || {};
   const params = useParams();
 
   useEffect(() => {
@@ -18,12 +26,14 @@ function Van({ vans }) {
 
   return (
     <section className="host-van-detail first-level-nest flex-column">
-        <Link to="/host/vans/" className="back-link underline">
-          ← Back to all Vans
-        </Link>
+      <Link to="/host/vans/" className="back-link underline">
+        ← Back to all Vans
+      </Link>
 
-        {id ? (
-          <>
+      {id ? (
+        <>
+          <div className="flex-row van-detail-wrapper">
+
             <img src={imageUrl} alt={`Photo of ${name}`} />
 
             <div className="van-info flex-column">
@@ -32,18 +42,24 @@ function Van({ vans }) {
               </div>
               <h1>{name}</h1>
               <p className="bold">${price}<span className="day">/day</span></p>
-              <p>{description}</p>
             </div>
+          </div>
 
-            <button className="primary-btn">
-              <Link to="/vans">Rent This Van</Link>
-            </button>
-          </>
-        ) : (
-          <h1>Vans loading...</h1>
-        )}
-      </section>
+          <nav className="host-nav">
+            <ul className="nav-list flex-row nested-nav">
+              {renderListLinks(hostVansDetailViews)}
+            </ul>
+          </nav>
+
+          {/* Outlet fot Van Details */}
+          <Outlet />
+
+        </>
+      ) : (
+        <h1>Vans loading...</h1>
+      )}
+    </section>
   );
 }
 
-export default Van;
+export default HostVanDetail;

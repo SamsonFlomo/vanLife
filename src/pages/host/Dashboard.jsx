@@ -21,7 +21,7 @@ function Dashboard() {
       <div className="dashboard-reviews row-wrapper flex-row">
         <div className="review-score flex-row">
           <h3>Review Score</h3>
-          <span className="rating"><span className="bold"><BsStarFill className="review-star" />5.0</span>/5</span>
+          <span className="dashboard-rating"><span className="bold"><BsStarFill className="rating small" />5.0</span>/5</span>
         </div>
         <Link to="">Details</Link>
       </div>

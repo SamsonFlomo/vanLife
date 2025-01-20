@@ -5,13 +5,18 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Vans from "./pages/van/Vans";
 import Van from "./pages/van/Van";
+import Error from "./pages/Error";
+import Login from "./pages/Login";
 import HostLayout from "./pages/host/HostLayout";
 import Income from "./pages/host/income";
 import Reviews from "./pages/host/reviews";
 import HostVans from "./pages/host/HostVans";
 import HostVanDetail from "./pages/host/HostVanDetail";
 import Dashboard from "./pages/host/Dashboard";
-import Layout from "./components/Layout.jsx";
+import Layout from "./components/Layout";
+import VanDetail from "./components/VanDetail";
+import VanPrice from "./components/VanPrice";
+import VanPhotos from "./components/VanPhotos";
 import { renderRoutes, getVans } from "./utils";
 import "./server";
 
@@ -67,8 +72,24 @@ function App() {
         forClass: "van-link",
         isNav: false,
       },
+      {
+        name: "Error",
+        url: "*",
+        component: <Error />,
+        forClass: "error-link",
+        isNav: false,
+      },
+      {
+        name: "Sign In",
+        url: "login",
+        component: <Login />,
+        forClass: "sign-in-link",
+        isNav: false,
+      },
     ];
   }, [vans]);
+
+
 
   // Host-specific views
   const hostViews = useCallback(() => {
@@ -98,7 +119,6 @@ function App() {
       {
         name: "VanDetail",
         url: "vans/:id",
-        component: <HostVanDetail vans={vans} />,
         forClass: "van-detail-link",
         isNav: false,
       },
@@ -112,6 +132,37 @@ function App() {
     ];
   }, [vans]);
 
+
+  // Host-Van-Details-Specific views
+  const hostVansDetailViews = useCallback(() => {
+    return [
+      {
+        name: "Detail",
+        url: "",
+        component: <VanDetail />,
+        forClass: "detail-link",
+        end: true,
+        isNav: true,
+      },
+      {
+        name: "Price",
+        url: "price",
+        component: <VanPrice />,
+        forClass: "price-link",
+        isNav: true,
+      },
+      {
+        name: "Photos",
+        url: "photos",
+        component: <VanPhotos />,
+        forClass: "photos-link",
+        isNav: true,
+      },
+    ];
+  }, [vans]);
+
+
+
   return (
     <BrowserRouter basename="/vanLife/">
       <Routes>
@@ -120,12 +171,20 @@ function App() {
           {/* Main Routes */}
           {renderRoutes(routes())}
 
+
           {/* Host Routes */}
           <Route
             path="host"
             element={<HostLayout hostViews={hostViews()} />}
           >
             {renderRoutes(hostViews())}
+            <Route
+              path="vans/:id"
+              element={<HostVanDetail hostVansDetailViews={hostVansDetailViews()} />}
+            >
+              {renderRoutes(hostVansDetailViews())}
+            </Route>
+
           </Route>
         </Route>
       </Routes>
