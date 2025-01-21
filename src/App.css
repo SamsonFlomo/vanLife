@@ -571,6 +571,9 @@ nav .vans-link {
   padding: 1rem;
 }
 
+.hosted-van-detail-nav {
+  max-width: 70%;
+}
 .van-price-collection .title {
   font-weight: bold;
   font-size: 2rem;
@@ -614,6 +617,20 @@ nav .vans-link {
   background-color: var(--simple-type-color);
 }
 
+#btn-2:hover {
+  color: var(--primary-white-txt);
+  background-color: var(--luxury-type-color);
+}
+
+#btn-3:hover {
+  color: var(--primary-white-txt);
+  background-color: var(--rugged-type-color);
+}
+
+#btn-1:hover {
+  color: var(--primary-white-txt);
+  background-color: var(--simple-type-color);
+}
 
 
 

@@ -26,7 +26,11 @@ function HostVanDetail({ hostVansDetailViews }) {
 
   return (
     <section className="host-van-detail first-level-nest flex-column">
-      <Link to="/host/vans/" className="back-link underline">
+      <Link 
+      to=".." 
+      className="back-link underline"
+      relative="path"
+      >
         ← Back to all Vans
       </Link>
 
@@ -46,13 +50,13 @@ function HostVanDetail({ hostVansDetailViews }) {
           </div>
 
           <nav className="host-nav">
-            <ul className="nav-list flex-row nested-nav">
+            <ul className="nav-list flex-row hosted-van-detail-nav">
               {renderListLinks(hostVansDetailViews)}
             </ul>
           </nav>
 
           {/* Outlet fot Van Details */}
-          <Outlet />
+          <Outlet context={{ vanDetails }}/>
 
         </>
       ) : (

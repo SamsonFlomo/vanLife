@@ -52,6 +52,7 @@ function Vans({ vans }) {
         <button
           className={`${clear ? name : "filter-btn"} ${active ? name : ""}`}
           key={id}
+          id={`btn-${id}`}
           onClick={() => filterVans(name, id)}
         >
           {name.toUpperCase()}

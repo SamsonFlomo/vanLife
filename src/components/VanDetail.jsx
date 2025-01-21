@@ -1,27 +1,16 @@
-import { useParams } from "react-router-dom";
+import { useParams, useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getVans } from "../utils";
 
 
 function VanDetail() {
-  const [vanDetail, setVanDetail] = useState({});
+  const { vanDetails } = useOutletContext();
+  const [vanDetail, setVanDetail] = useState(vanDetails);
   const {
     name,
     description,
     type,
   } = vanDetail || {};
   const params = useParams();
-  
-  console.log(vanDetail);
-
-  useEffect(() => {
-    const fetchVans = () => {
-      getVans(setVanDetail, `/api/vans/${params.id}`);
-    };
-
-    fetchVans();
-  }, []);
-
 
 
   return (

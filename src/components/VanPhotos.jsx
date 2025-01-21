@@ -1,21 +1,15 @@
-import { useParams } from "react-router-dom";
+import { useParams, useOutletContext  } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getVans } from "../utils";
 
 
 
 function VanPhotos() {
-  const [vanDetail, setVanDetail] = useState({});
-  const { imageUrl, name } = vanDetail || {};
+ const { vanDetails } = useOutletContext();
+  const [vanDetail, setVanDetail] = useState(vanDetails);
+  const {
+    imageUrl
+  } = vanDetail || {};
   const params = useParams();
-
-  useEffect(() => {
-    const fetchVans = () => {
-      getVans(setVanDetail, `/api/vans/${params.id}`);
-    };
-
-    fetchVans();
-  }, []);
 
 
   return (
