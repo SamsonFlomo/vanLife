@@ -1,13 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useState, useCallback, useEffect } from "react";
-import { toggleStateProperty } from "../../utils";
+import { toggleStateProperty, highlightActiveFilterBtn } from "../../utils";
 
 function Vans({ vans }) {
   const [localVans, setLocalVans] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
   
-  useEffect(() => {
-    setLocalVans(vans); // Initialize the local state with props
-  }, [vans]);
+  const typeFilter = searchParams.get("type");
 
   const [types, setTypes] = useState([
     { name: "simple", active: false, id: 1, clear: false },
@@ -15,26 +14,32 @@ function Vans({ vans }) {
     { name: "rugged", active: false, id: 3, clear: false },
     { name: "clear-filters", active: false, id: 0, clear: true },
   ]);
+  
+  useEffect(() => {
+    setLocalVans(vans); 
+    highlightActiveFilterBtn(setTypes, typeFilter)
+  }, [vans]);
 
   function filterVans(filterType, id) {
     switch (filterType) {
       case "simple":
-        setLocalVans(vans.filter((van) => van.type === "simple"));
+        setSearchParams(prevVal => ({ ...prevVal, type:"simple", }));
         toggleStateProperty(types, setTypes, "active", id);
         break;
 
       case "luxury":
-        setLocalVans(vans.filter((van) => van.type === "luxury"));
+        setSearchParams(prevVal => ({ ...prevVal, type:"luxury", }));
         toggleStateProperty(types, setTypes, "active", id);
         break;
 
       case "rugged":
-        setLocalVans(vans.filter((van) => van.type === "rugged"));
+        setSearchParams(prevVal => ({ ...prevVal, type:"rugged", }));
         toggleStateProperty(types, setTypes, "active", id);
         break;
 
       case "clear-filters":
-        setLocalVans(vans); // Reset to original data
+        setLocalVans(vans);
+        setSearchParams(prevVal => ({ ...prevVal, type:"", }));
         setTypes((prevTypes) =>
           prevTypes.map((type) => ({ ...type, active: false }))
         );
@@ -58,10 +63,14 @@ function Vans({ vans }) {
           {name.toUpperCase()}
         </button>
       )),
-    [types, filterVans, vans]
+    [types, filterVans, typeFilter]
   );
 
-  const vansElements = localVans.map(({ id, name, price, type, imageUrl }) => (
+  const vansElements = (typeFilter 
+    ? localVans
+    .filter(({ type }) => type === typeFilter) :
+    localVans )
+    .map(({ id, name, price, type, imageUrl }) => (
     <Link
       to={`/vans/${id}`}
       className="van-card"

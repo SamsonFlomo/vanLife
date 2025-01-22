@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { handleChange } from "../utils";
 
 
 function Login() {
-  const [accountInfo, setAccountInfo] = useState({
+  const [accountInfo, setAccountInfo] = useState(JSON.parse(localStorage.getItem("accountInfo")) || {
     email: "",
     password: "",
   });
+  
+  useEffect(() => {
+    localStorage.setItem("accountInfo", JSON.stringify(accountInfo));
+  },[accountInfo])
 
 
   return (

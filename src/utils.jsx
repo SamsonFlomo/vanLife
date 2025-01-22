@@ -30,6 +30,23 @@ const toggleStateProperty = (state, setState, propertyStr, objectItemId) => {
   }
 };
 
+function highlightActiveFilterBtn(setState, type){
+  setState((prevState) =>
+      prevState.map((item) => {
+        if (item.name === type) {
+          return {
+            ...item,
+            active: true,
+          };
+        }
+        return {
+          ...item,
+          [type]: false,
+        };;
+      })
+    );
+}
+
 function resetStateProperty(state, setState, propertyStr) {
   if (!state || (typeof state !== "object" && !Array.isArray(state))) {
     console.error("Invalid state: statresetStatePropertye should be an object or array");
@@ -125,6 +142,7 @@ export {
   renderListLinks,
   getVans,
   handleChange,
+  highlightActiveFilterBtn,
 };
 
 
