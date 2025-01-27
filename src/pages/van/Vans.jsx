@@ -53,8 +53,9 @@ function Vans({ vans }) {
 
   const filterVansElements = useCallback(
     () =>
-      types.map(({ name, id, active, clear }) => (
-        <button
+      types.map(({ name, id, active, clear }) => {
+        if(name === "clear-filters" && !typeFilter) return;
+        return <button
           className={`${clear ? name : "filter-btn"} ${active ? name : ""}`}
           key={id}
           id={`btn-${id}`}
@@ -62,7 +63,7 @@ function Vans({ vans }) {
         >
           {name.toUpperCase()}
         </button>
-      )),
+      }),
     [types, filterVans, typeFilter]
   );
 
@@ -95,7 +96,9 @@ function Vans({ vans }) {
     <main className="main vans-page">
       <section className="content-wrapper">
         <h1>Explore Our Vans Options</h1>
-        <div className="van-filters">{filterVansElements()}</div>
+        <div className="van-filters">
+          {filterVansElements()}
+        </div>
         <div className="vans-wrapper">{vansElements}</div>
       </section>
     </main>
