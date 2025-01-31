@@ -26,7 +26,7 @@ function About() {
             <button
               className="action-btn secondary-btn"
             >
-              <Link to="/vans">
+              <Link to="../vans">
                 Explore Our Vans
               </Link>
             </button>

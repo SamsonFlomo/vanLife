@@ -16,7 +16,7 @@ function HostVans() {
 
   const hostVansElements = hostVans?.map(({ id, name, price, description, type, imageUrl }) => (
     <Link 
-      to={`/host/vans/${id}`}
+      to={id}
       key={id} 
       className={`listed-van row-wrapper flex-row ${name}`}
     >

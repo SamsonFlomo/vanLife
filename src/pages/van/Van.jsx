@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation, } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getVans } from "../../utils";
 
@@ -7,6 +7,9 @@ function Van({ vans }) {
   const [vanDetails, setVanDetails] = useState({});
   const { id, name, price, description, imageUrl, type } = vanDetails || {};
   const params = useParams();
+  const location = useLocation();
+  const searchParams = location.state.search; 
+  const filterType = location.state?.type || "all";
 
    useEffect(() => {
     const fetchVans = () => {
@@ -20,8 +23,12 @@ function Van({ vans }) {
   return (
     <main className="main van-page">
       <section className="content-wrapper">
-        <Link to="/vans" className="back-link">
-          ← Back to all Vans
+        <Link 
+          to={`..?${searchParams}`} 
+          className="back-link light-bold"
+          relative="path"
+        >
+          ← Back to {filterType} Vans
         </Link>
 
         {id ? (

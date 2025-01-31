@@ -27,10 +27,10 @@ function HostVanDetail({ hostVansDetailViews }) {
   return (
     <section className="host-van-detail first-level-nest flex-column">
       <Link 
-      to=".." 
-      className="back-link underline"
-      relative="path"
-      >
+          to=".." 
+          className="back-link light-bold"
+          relative="path"
+        >
         ← Back to all Vans
       </Link>
 

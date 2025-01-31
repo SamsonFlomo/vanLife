@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, } from "react-router-dom";
 import { useState, useCallback, useEffect } from "react";
 import { toggleStateProperty, highlightActiveFilterBtn } from "../../utils";
 
@@ -19,6 +19,7 @@ function Vans({ vans }) {
     setLocalVans(vans); 
     highlightActiveFilterBtn(setTypes, typeFilter)
   }, [vans]);
+
 
   function filterVans(filterType, id) {
     switch (filterType) {
@@ -73,7 +74,8 @@ function Vans({ vans }) {
     localVans )
     .map(({ id, name, price, type, imageUrl }) => (
     <Link
-      to={`/vans/${id}`}
+      to={id}
+      state={{search: searchParams.toString(), type: typeFilter}}
       className="van-card"
       aria-label={`View details for ${name} at price ${price} per day.`}
       key={id}

@@ -113,6 +113,11 @@ button a {
   color: var(--secondary-black-txt);
 }
 
+.light-bold {
+  color: var(--secondary-black-txt);
+  font-weight: bold;
+}
+
 .underline {
   text-decoration: underline;
 }

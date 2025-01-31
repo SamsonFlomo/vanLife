@@ -11,7 +11,7 @@ function Home() {
           Rent the perfect van to make your perfect road trip.
         </p>
         <button className="primary-btn">
-          <Link to="/vans">
+          <Link to="vans">
             Find Your Van
           </Link>
         </button>
