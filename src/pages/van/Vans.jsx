@@ -1,10 +1,12 @@
 import { Link, useSearchParams, } from "react-router-dom";
 import { useState, useCallback, useEffect } from "react";
-import { toggleStateProperty, highlightActiveFilterBtn } from "../../utils";
+import { toggleStateProperty, highlightActiveFilterBtn, getVansTrial } from "../../utils";
 
 function Vans({ vans }) {
   const [localVans, setLocalVans] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   
   const typeFilter = searchParams.get("type");
 
@@ -15,10 +17,24 @@ function Vans({ vans }) {
     { name: "clear-filters", active: false, id: 0, clear: true },
   ]);
   
-  useEffect(() => {
-    setLocalVans(vans); 
-    highlightActiveFilterBtn(setTypes, typeFilter)
-  }, [vans]);
+ useEffect(() => {
+  async function clean() {
+    setLoading(true);
+    try { 
+      const data = await getVansTrial("/api/vans");
+      setLocalVans(data.vans);
+      highlightActiveFilterBtn(setTypes, typeFilter);
+    } catch (error) {
+      setError(error);
+      console.error("Error fetching vans:", error);
+    } finally {
+      setLoading(false);
+    }
+  }
+  
+  clean();
+}, []);
+
 
 
   function filterVans(filterType, id) {
@@ -67,6 +83,7 @@ function Vans({ vans }) {
       }),
     [types, filterVans, typeFilter]
   );
+  
 
   const vansElements = (typeFilter 
     ? localVans
@@ -93,6 +110,11 @@ function Vans({ vans }) {
       </div>
     </Link>
   ));
+  
+  if(loading) return (<h1 aria-live="polite">Loading...</h1>);
+  if(error) return (
+    <h1 arial-live="assertive">There was an error: {error.message}</h1>
+  );
 
   return (
     <main className="main vans-page">

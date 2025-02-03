@@ -109,7 +109,11 @@ async function getVans(setState, url) {
     const res = await fetch(url);
 
     if (!res.ok) {
-      throw new Error(`HTTP error! Status: ${res.status}`);
+      throw {
+            message: "Failed to fetch vans", 
+            statusText: res.statusText,
+            status: res.status
+        }
     }
 
     const data = await res.json();
@@ -119,6 +123,26 @@ async function getVans(setState, url) {
   } catch (error) {
     console.error("Error fetching vans:", error.message || error);
   }
+}
+
+
+async function getVansTrial(url) {
+  if (typeof url !== "string") {
+    console.error("Invalid arguments passed to getVans");
+    return;
+  }
+
+    const res = await fetch(url);
+
+    if (!res.ok) {
+      throw {
+            message: "Failed to fetch vans", 
+            statusText: res.statusText,
+            status: res.status
+        }
+    }
+
+    return res.json();
 }
 
 
@@ -143,6 +167,7 @@ export {
   getVans,
   handleChange,
   highlightActiveFilterBtn,
+  getVansTrial,
 };
 
 
